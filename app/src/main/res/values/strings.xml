@@ -3,4 +3,12 @@
     <string name="connect_cmd">connect</string>
     <string name="connect">Connect</string>
     <string name="udp_failure">UDP connect failure!</string>
+    <string name="device_ip">device_ip</string>
+    <string name="ok_cmd">OK</string>
+    <string name="cannot_scan">Cannot scan any device</string>
+    <string name="wifi_enable">Enable wifi?</string>
+    <string name="settings">Setting</string>
+    <string name="cancel">Cancel</string>
+    <string name="teacher">Teacher</string>
+    <string name="student">Student</string>
 </resources>

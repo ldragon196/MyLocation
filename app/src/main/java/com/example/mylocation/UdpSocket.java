@@ -1,5 +1,6 @@
 package com.example.mylocation;
 
+import android.app.Application;
 import android.os.Handler;
 
 import java.io.IOException;
@@ -9,14 +10,25 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
-public class UdpSocket {
-    private final int LocalPort;
-    private final Handler UdpHandler;
+public class UdpSocket extends Application {
+    private final int LocalPort = Constants.UDP_PORT;
+    private Handler UdpHandler;
     private UdpThread UdpThread;
     public static final int UDP_MESSAGE_READ = 1, UDP_MESSAGE_WRITE = 2, UDP_ERROR = 3;
 
-    UdpSocket(Handler handler, int port) {
-        LocalPort = port;
+    private static UdpSocket instance;
+    public static synchronized UdpSocket getInstance() {
+        return instance;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        UdpHandler = null;
+        instance = this;
+    }
+
+    public void registerHandler(Handler handler){
         UdpHandler = handler;
     }
 
@@ -98,7 +110,9 @@ public class UdpSocket {
             }
             catch(IOException e) {
                 e.printStackTrace();
-                UdpHandler.obtainMessage(UDP_ERROR, 0, 0, null).sendToTarget();
+                if(UdpHandler != null){
+                    UdpHandler.obtainMessage(UDP_ERROR, 0, 0, null).sendToTarget();
+                }
             }
         }
 
@@ -107,11 +121,16 @@ public class UdpSocket {
                 byte[] data = new byte[4096];
                 DatagramPacket packet = new DatagramPacket(data, data.length);
                 socket.receive(packet);
-                UdpHandler.obtainMessage(UDP_MESSAGE_READ, packet.getLength(), 0, packet.getData()).sendToTarget();
+
+                if(UdpHandler != null){
+                    UdpHandler.obtainMessage(UDP_MESSAGE_READ, packet.getLength(), 0, packet.getData()).sendToTarget();
+                }
             }
             catch(IOException e) {
                 e.printStackTrace();
-                UdpHandler.obtainMessage(UDP_ERROR, 0, 0, null).sendToTarget();
+                if(UdpHandler != null){
+                    UdpHandler.obtainMessage(UDP_ERROR, 0, 0, null).sendToTarget();
+                }
             }
         }
     }

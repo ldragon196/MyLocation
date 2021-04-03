@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_dp">20dp</dimen>
+    <dimen name="medium_dp">35dp</dimen>
+    <dimen name="large_dp">50dp</dimen>
+    <dimen name="huge_dp">80dp</dimen>
+
+    <dimen name="small_text">16sp</dimen>
+    <dimen name="large_text">20sp</dimen>
+</resources>
