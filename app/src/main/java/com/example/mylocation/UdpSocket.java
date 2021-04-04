@@ -10,25 +10,13 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketException;
 
-public class UdpSocket extends Application {
+public class UdpSocket {
     private final int LocalPort = Constants.UDP_PORT;
-    private Handler UdpHandler;
+    private final Handler UdpHandler;
     private UdpThread UdpThread;
     public static final int UDP_MESSAGE_READ = 1, UDP_MESSAGE_WRITE = 2, UDP_ERROR = 3;
 
-    private static UdpSocket instance;
-    public static synchronized UdpSocket getInstance() {
-        return instance;
-    }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        UdpHandler = null;
-        instance = this;
-    }
-
-    public void registerHandler(Handler handler){
+    UdpSocket(Handler handler) {
         UdpHandler = handler;
     }
 
@@ -49,7 +37,6 @@ public class UdpSocket extends Application {
         if(UdpThread != null) {
             UdpThread.setReceiveFlag(false);
         }
-
         UdpThread = new UdpThread();
         UdpThread.write(message, address, port);
         UdpThread.start();

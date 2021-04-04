@@ -7,4 +7,5 @@
 
     <dimen name="small_text">16sp</dimen>
     <dimen name="large_text">20sp</dimen>
+    <dimen name="text_width">80sp</dimen>
 </resources>

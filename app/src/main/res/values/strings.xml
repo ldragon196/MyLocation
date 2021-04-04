@@ -1,14 +1,21 @@
 <resources>
     <string name="app_name">My Location</string>
-    <string name="connect_cmd">connect</string>
     <string name="connect">Connect</string>
     <string name="udp_failure">UDP connect failure!</string>
     <string name="device_ip">device_ip</string>
-    <string name="ok_cmd">OK</string>
     <string name="cannot_scan">Cannot scan any device</string>
     <string name="wifi_enable">Enable wifi?</string>
     <string name="settings">Setting</string>
     <string name="cancel">Cancel</string>
     <string name="teacher">Teacher</string>
     <string name="student">Student</string>
+
+    <string name="connect_cmd">connect</string>
+    <string name="ok_cmd">OK</string>
+    <string name="ping_cmd">PING</string>
+    <string name="info_cmd">INFO</string>
+    <string name="error_cmd">ERROR</string>
+    <string name="speed">Speed:</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
 </resources>
